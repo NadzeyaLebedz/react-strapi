@@ -1,38 +1,59 @@
 .App {
+  background-color: rgb(0, 105, 255);
+  min-height: 724px;
+  padding: 50px;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 600;
   text-align: center;
+  color: rgb(255, 255, 255);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.article {
+  padding: 0px 0px 20px 25px;
+  color: rgb(255, 255, 255);
+  font-size: 28px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.loading {
+  font-size: 16px;
+  color: #FFFFFF;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.error {
+  font-size: 16px;
+  color: red;
+}
+
+.container {
+  font-size: 18px;
+  background: rgb(255, 255, 255);
+  border-radius: 12px;
+  border-bottom: 1px solid rgb(237, 242, 247);
+  cursor: pointer;
+  padding: 26px 24px;
+  margin-bottom: 10px;
+}
+
+.block {
   display: flex;
-  flex-direction: column;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.question {
+  font-weight: 500;
+  margin: 0px;
+  flex: 0.95 1 0%;
+  color: rgb(30, 30, 40);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.text {
+  color: rgb(143, 157, 177);
+  font-size: 18px;
+  padding-bottom: 20px;
 }
