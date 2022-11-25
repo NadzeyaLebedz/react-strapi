@@ -1,24 +1,12 @@
 import React, { useState } from 'react';
-// import qs from 'qs';
 import useFetch from '../hooks/useFetch';
     
 function FAQ() {
   const [selectedItem, setSelectedItem] = useState(null);
 
-  // const query = qs.stringify({ 
-  //   populate: {
-  //     populate: '*',
-  //     zone: {
-  //       populate: '*',
-  //     },
-  //   },
-  // });
+  const url = 'http://34.222.224.113:1337';
 
-  const { loading, error, data } = useFetch(`http://34.222.224.113:1337/api/razdely-faqs?populate=*`);
-
-  console.log(loading, 'loading');
-  console.log(error, 'error');
-  console.log(data, 'estate');
+  const { loading, error, data } = useFetch(`${url}/api/razdely-faqs?populate=*`);
 
   if(loading) return <p className='loading'>Loading...</p>
   if(error) return <p className='error'>Error :(</p>
@@ -27,7 +15,7 @@ function FAQ() {
     setSelectedItem((prev) => {
         return prev === id ? null : id;
     });
-};
+  };
 
   return (
     <div className='App'>
@@ -36,17 +24,20 @@ function FAQ() {
         <div key={d.id}>
           <p className='article'>{d.attributes.Caption}</p>
 
-          {d.attributes.faqs.data.map((faq) => (
-            <div className='container'>
-            <div key={faq.id} className='block'>
+          {d.attributes.faqs.data.map((faq) => {
+            const src = faq.attributes.Text.match(/(\/.*?\.\w{3})/img);
+            const newPath = faq.attributes.Text.replaceAll(/<img .*?>/g, `<img src="${url}${src}" atl="image" />` );
+            return (
+            <div className='container' key={faq.id}>
+            <div className='block'>
               <p className='question'>{faq.attributes.Caption}</p>
               <button type='button' onClick={() => handleOpen(faq.id)}></button>
             </div>
             <div>
-              {selectedItem === faq.id && (<div className='text' dangerouslySetInnerHTML={{__html: faq.attributes.Text}}></div>)}
+              {selectedItem === faq.id && (<div className='text' dangerouslySetInnerHTML={{__html: newPath}}></div>)}
             </div>
           </div>
-          ))}
+          )})}
         </div>
       ))}
         
