@@ -11,6 +11,12 @@
   color: rgb(255, 255, 255);
 }
 
+.wrapper {
+  padding: 0px 50px 50px;
+  max-width: 850px;
+  margin: 0px auto;
+}
+
 .article {
   padding: 0px 0px 20px 25px;
   color: rgb(255, 255, 255);
@@ -56,4 +62,14 @@
   color: rgb(143, 157, 177);
   font-size: 18px;
   padding-bottom: 20px;
+}
+
+.text a {
+  color:rgb(0, 105, 255);
+  text-decoration: none;
+}
+
+.info figure {
+  width: auto !important;
+  margin: 0;
 }

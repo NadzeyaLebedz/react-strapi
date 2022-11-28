@@ -19,22 +19,21 @@ function FAQ() {
 
   return (
     <div className='App'>
-      <h1 className='title'>FAQ</h1>
+      <h1 className='title'>Вопросы - ответы</h1>
       {data.map((d) => (
-        <div key={d.id}>
+        <div key={d.id} className="wrapper">
           <p className='article'>{d.attributes.Caption}</p>
 
           {d.attributes.faqs.data.map((faq) => {
-            const src = faq.attributes.Text.match(/(\/.*?\.\w{3})/img);
-            const newPath = faq.attributes.Text.replaceAll(/<img .*?>/g, `<img src="${url}${src}" atl="image" />` );
+            const content = faq.attributes.Text.replace(/src="/g, `src="${url}`);
             return (
             <div className='container' key={faq.id}>
             <div className='block'>
               <p className='question'>{faq.attributes.Caption}</p>
               <button type='button' onClick={() => handleOpen(faq.id)}></button>
             </div>
-            <div>
-              {selectedItem === faq.id && (<div className='text' dangerouslySetInnerHTML={{__html: newPath}}></div>)}
+            <div className='info'>
+              {selectedItem === faq.id && (<div className='text' dangerouslySetInnerHTML={{__html: content}}></div>)}
             </div>
           </div>
           )})}
