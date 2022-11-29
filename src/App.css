@@ -69,10 +69,9 @@
   text-decoration: none;
 }
 
-.text table {
-  border-spacing: 2px;
+table, th, td {
+  border: 1px solid;
   border-collapse: collapse;
-  display: table;
 }
 
 .text table td {

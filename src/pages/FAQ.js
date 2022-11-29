@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import qs from 'qs';
 import useFetch from '../hooks/useFetch';
+import SinitizeHtml from '../components/Sanitize';
 
 const query = qs.stringify({
   locale: ['ru'],
@@ -46,7 +47,7 @@ function FAQ() {
               <button type='button' onClick={() => handleOpen(faq.id)}></button>
             </div>
             <div className='info'>
-              {selectedItem === faq.id && (<div className='text' dangerouslySetInnerHTML={{__html: faq.attributes.Text}}></div>)}
+              {selectedItem === faq.id && (<SinitizeHtml html={faq?.attributes?.Text} />)}
             </div>
           </div>
           )})}
