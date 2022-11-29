@@ -1,12 +1,25 @@
 import React, { useState } from 'react';
+import qs from 'qs';
 import useFetch from '../hooks/useFetch';
+
+const query = qs.stringify({
+  locale: ['ru'],
+  sort: ['order:asc'],
+  populate: {
+    faqs: {
+      sort: ['Order:asc'],
+    }
+  }, 
+  }, {
+  encodeValuesOnly: true,
+});
     
 function FAQ() {
   const [selectedItem, setSelectedItem] = useState(null);
 
-  const url = 'http://34.222.224.113:1337';
+  const url = 'http://content.wbdevel.com:1337';
 
-  const { loading, error, data } = useFetch(`${url}/api/razdely-faqs?populate=*`);
+  const { loading, error, data } = useFetch(`${url}/api/razdely-faqs/?${query}`);
 
   if(loading) return <p className='loading'>Loading...</p>
   if(error) return <p className='error'>Error :(</p>
@@ -25,7 +38,7 @@ function FAQ() {
           <p className='article'>{d.attributes.Caption}</p>
 
           {d.attributes.faqs.data.map((faq) => {
-            const content = faq.attributes.Text.replace(/src="/g, `src="${url}`);
+            // const content = faq.attributes.Text.replace(/src="/g, `src="${url}`);
             return (
             <div className='container' key={faq.id}>
             <div className='block'>
@@ -33,7 +46,7 @@ function FAQ() {
               <button type='button' onClick={() => handleOpen(faq.id)}></button>
             </div>
             <div className='info'>
-              {selectedItem === faq.id && (<div className='text' dangerouslySetInnerHTML={{__html: content}}></div>)}
+              {selectedItem === faq.id && (<div className='text' dangerouslySetInnerHTML={{__html: faq.attributes.Text}}></div>)}
             </div>
           </div>
           )})}
